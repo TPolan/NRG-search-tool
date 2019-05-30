@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
@@ -56,15 +57,15 @@
                 <tr>
                     <td>{{$result->external_track_id}}</td>
                     <td>{{$result->person_interprets}}</td>
-                    <td>{{$result->name}}</td>
+                    <td>{{$result->trackName}}</td>
                     <td>Track - All Artists</td>
                     <td>Track - Other Artists</td>
                     <td>Track - Instruments</td>
-                    <td>Track - Number of Artists</td>
-                    <td>Track - Artists Share</td>
+                    <td>{{$numOfArtists}}</td>
+                    <td>{{$artistsShare . '%'}}</td>
                     <td>{{$result->duration}}</td>
-                    <td>{{$result->isrc_ident}}</td>
-                    <td>Album - Name</td>
+                    <td>{{$result->isrc_country_code . $result->isrc_registrant_code . $result->isrc_year . $result->isrc_ident}}</td>
+                    <td>{{$result->albumName}}</td>
                     <td>{{$result->external_album_id}}</td>
                     <td>{{$result->release_year}}</td>
                     <td>Label - Name</td>
