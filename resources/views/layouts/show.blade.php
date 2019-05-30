@@ -65,7 +65,7 @@
                     <td>{{$result->duration}}</td>
                     <td>{{$result->isrc_country_code . $result->isrc_registrant_code . $result->isrc_year . $result->isrc_ident}}</td>
                     <td>{{$result->albumName}}</td>
-                    <td>{{$result->external_album_id}}</td>
+                    <td>{{$result->code}}</td>
                     <td>{{$result->release_year}}</td>
                     <td>{{$result->labelName}}</td>
                 </tr>
