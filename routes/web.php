@@ -11,15 +11,16 @@
 |
 */
 
+
+
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+//Search tool routes:
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-//Search tool routes:
 Route::get('/search', 'SearchController@index');
 Route::get('/show', 'SearchController@show');
 

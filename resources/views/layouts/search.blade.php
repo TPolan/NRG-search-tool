@@ -3,14 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <title>NRG Search Tool</title>
+    <title>NRG Repertoire Search</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-3">NRG Repertoire </h1>
+        <h1 class="display-3">NRG Repertoire Search</h1>
         <form method="get" action="{{action('SearchController@show')}}">
             @csrf
             <div class="form-group">
