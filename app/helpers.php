@@ -11,3 +11,10 @@ function artistShare($nOfArtists)
     return floor(100 / $nOfArtists);
 }
 
+function stripCharsFromArray ($fromArray,$charToStrip)
+{
+    $fromArray = array_splice($fromArray, array_search($charToStrip, $fromArray));
+    $fromArray = implode('', $fromArray);
+
+    return $fromArray;
+}

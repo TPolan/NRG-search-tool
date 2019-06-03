@@ -20,7 +20,7 @@
                     <input type="text" class="form-control" name="name" id="name" value="{{$request->name}}">
 
                     <label for="formGroupExampleInput2">Exclude:</label>
-                    <input type="text" class="form-control" id="exclude" name="exclude" value="">
+                    <input type="text" class="form-control" id="exclude" name="exclude" value="{{$seeSearch}}">
 
                     <button class="btn btn-primary btn-lg" type="submit">Search</button>
                 </div>
