@@ -19,7 +19,7 @@
                 <input type="text" class="form-control" name="name" id="name" >
 
                 <label for="formGroupExampleInput2">Exclude:</label>
-                <input type="text" class="form-control" id="exclude" name="exclude" >
+                <input type="text" class="form-control" id="exclude" name="exclude">
 
                 <button class="btn btn-primary btn-lg" type="submit">Search</button>
             </div>

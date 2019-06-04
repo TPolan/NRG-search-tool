@@ -20,7 +20,7 @@
                     <input type="text" class="form-control" name="name" id="name" value="{{$request->name}}">
 
                     <label for="formGroupExampleInput2">Exclude:</label>
-                    <input type="text" class="form-control" id="exclude" name="exclude" value="{{$seeSearch}}">
+                    <input type="text" class="form-control" id="exclude" name="exclude" value="{{$request->exclude}}">
 
                     <button class="btn btn-primary btn-lg" type="submit">Search</button>
                 </div>
@@ -29,9 +29,8 @@
     </div>
 
 
-    @if ($results == null)
-        <h2>"No result"</h2>
-    @else
+        <h2>{{$finalSearch}}</h2>
+        <h2>{{$excludeSearch}}</h2>
         <table class="table">
             <thead>
             <tr>
@@ -55,10 +54,10 @@
             @foreach($results as $result)
                 <tr>
                     <td>{{$result->external_track_id}}</td>
-                    <td>{{$result->person_interprets}}</td>
+                    <td>{{stripChars($request->name,'"'}}</td>
                     <td>{{$result->trackName}}</td>
                     <td>{{$result->person_interprets}}</td>
-                    <td>Track - Other Artists</td>
+                    <td>{{extractOtherArtists($result->person_interprets,$request->name)}}</td>
                     <td>{{$result->instruments}}</td>
                     <td>{{countArtists($result->person_interprets)}}</td>
                     <td>{{artistShare(countArtists($result->person_interprets)) . '%'}}</td>
@@ -70,8 +69,8 @@
                     <td>{{$result->labelName}}</td>
                 </tr>
             @endforeach
+{{--                    {{ $results->links() }}--}}
         </table>
-    @endif
 </div>
 
 

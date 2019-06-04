@@ -11,10 +11,19 @@ function artistShare($nOfArtists)
     return floor(100 / $nOfArtists);
 }
 
-function stripCharsFromArray ($fromArray,$charToStrip)
-{
-    $fromArray = array_splice($fromArray, array_search($charToStrip, $fromArray));
-    $fromArray = implode('', $fromArray);
+function extractOtherArtists($artists, $mainArtistsName) {
+    $artists = explode(',', $artists);
+    $artists = array_diff($artists, array($mainArtistsName));
+    $artists = implode(',',$artists);
 
-    return $fromArray;
+    return $artists ;
+}
+
+function stripChars($charToStrip, $stringToStripFrom)
+{
+    $charToStrip = array($charToStrip);
+    $stringToStripFrom = str_split($stringToStripFrom);
+    $stringToStripFrom = array_diff($stringToStripFrom,$charToStrip);
+    $stringToStripFrom = implode('', $stringToStripFrom);
+    return $stringToStripFrom;
 }
