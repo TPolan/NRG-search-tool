@@ -28,15 +28,15 @@ class SearchController extends Controller
             $searchedNameArr = str_split($searchedName);
             if (in_array(',', $searchedNameArr)) {
                 $searchedNameArr = array_diff($searchedNameArr, array(','));
-                $searchedNameArr = implode('', $searchedNameArr);
+                $searchedNameArr = implode($searchedNameArr);
                 $searchedNameArr = explode(' ', $searchedNameArr);
                 $finalSearch = array();
                 foreach ($searchedNameArr as $item)
-                    array_push($finalSearch, "%" . $item . "%'");
+                    array_push($finalSearch, "%" . $item . "%");
 
             } elseif (in_array('"', $searchedNameArr)) {
                 $searchedNameArr = array_diff($searchedNameArr, array('"'));
-                $searchedNameArr = implode('', $searchedNameArr);
+                $searchedNameArr = implode($searchedNameArr);
                 $finalSearch = "%" . $searchedNameArr . "%";
             } else {
                 $searchedNameArr = explode(' ', $searchedName);
@@ -61,7 +61,8 @@ class SearchController extends Controller
                 ->selectRaw('tracks.tag_instruments as instruments')
                 ->join('albums', 'tracks.external_album_id', '=', 'albums.external_album_id')
                 ->join('labels', 'tracks.external_album_id', '=', 'labels.external_id')
-                ->where([['person_interprets', 'like', $finalSearch[0]],[['person_interprets', 'like', $finalSearch[1]]])
+                ->where([['person_interprets', 'like', $finalSearch[0]], ['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
+                ->orWhere([['person_interprets', 'like', $finalSearch[1]], ['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
                 ->get();
         } else {
             $results = DB::table('tracks')->select('external_track_id', 'duration', 'isrc_country_code', 'isrc_registrant_code', 'isrc_year', 'isrc_ident', 'person_interprets', 'tracks.external_album_id', 'albums.code', 'albums.release_year')
@@ -71,12 +72,12 @@ class SearchController extends Controller
                 ->selectRaw('tracks.tag_instruments as instruments')
                 ->join('albums', 'tracks.external_album_id', '=', 'albums.external_album_id')
                 ->join('labels', 'tracks.external_album_id', '=', 'labels.external_id')
-                ->where([['person_interprets', 'like', $finalSearch],['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
+                ->where([['person_interprets', 'like', $finalSearch], ['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
                 ->get();
         }
 
 
-        $show = view("layouts.show", compact('results', 'finalSearch','excludeSearch'));
+        $show = view("layouts.show", compact('results', 'finalSearch', 'excludeSearch'));
         return $show->withRequest($request);
     }
 }
