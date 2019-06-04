@@ -61,8 +61,7 @@ class SearchController extends Controller
                 ->selectRaw('tracks.tag_instruments as instruments')
                 ->join('albums', 'tracks.external_album_id', '=', 'albums.external_album_id')
                 ->join('labels', 'tracks.external_album_id', '=', 'labels.external_id')
-                ->where('person_interprets', 'like', $finalSearch[0])
-                ->orWhere('person_interprets', 'like', $finalSearch[1])
+                ->where([['person_interprets', 'like', $finalSearch[0]],[['person_interprets', 'like', $finalSearch[1]]])
                 ->get();
         } else {
             $results = DB::table('tracks')->select('external_track_id', 'duration', 'isrc_country_code', 'isrc_registrant_code', 'isrc_year', 'isrc_ident', 'person_interprets', 'tracks.external_album_id', 'albums.code', 'albums.release_year')

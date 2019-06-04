@@ -54,10 +54,10 @@
             @foreach($results as $result)
                 <tr>
                     <td>{{$result->external_track_id}}</td>
-                    <td>{{stripChars($request->name,'"'}}</td>
+                    <td>{{stripChars('"',$request->name)}}</td>
                     <td>{{$result->trackName}}</td>
                     <td>{{$result->person_interprets}}</td>
-                    <td>{{extractOtherArtists($result->person_interprets,$request->name)}}</td>
+                    <td>{{extractOtherArtists($request->person_interprets,$request->name) ? extractOtherArtists($request->person_interprets,$request->name) : "No other Artists"}}</td>
                     <td>{{$result->instruments}}</td>
                     <td>{{countArtists($result->person_interprets)}}</td>
                     <td>{{artistShare(countArtists($result->person_interprets)) . '%'}}</td>
