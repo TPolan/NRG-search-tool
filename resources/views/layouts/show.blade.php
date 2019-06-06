@@ -53,13 +53,13 @@
             <div class="single_result" id="single_result">
                 <tr>
                     <td>{{$result->external_track_id}}</td>
-                    <td>{{stripChars(array('"'),$request->name)}}</td>
+                    <td>{{extractMainArtist($result->person_interprets,$request->name)}}</td>
                     <td>{{$result->trackName}}</td>
                     <td>{{$result->person_interprets}}</td>
-                    <td>{{extractOtherArtists($request->person_interprets,$request->name) ? extractOtherArtists($request->person_interprets,stripChars(array('"',','),$request->name)) : "No other Artists"}}</td>
+                    <td>{{extractOtherArtists($result->person_interprets,$request->name)}}</td>
                     <td>{{$result->instruments}}</td>
-                    <td>{{countArtists($request->person_interprets)}}</td>
-                    <td>{{artistShare(countArtists($request->person_interprets)) . '%'}}</td>
+                    <td>{{countArtists($result->person_interprets)}}</td>
+                    <td>{{artistShare(countArtists($result->person_interprets)) . '%'}}</td>
                     <td>{{$result->duration}}</td>
                     <td>{{$result->isrc_country_code . $result->isrc_registrant_code . $result->isrc_year . $result->isrc_ident}}</td>
                     <td>{{$result->albumName}}</td>
@@ -72,22 +72,22 @@
                 </tr>
             </div>
         @endforeach
-        {{--                    {{ $results->links() }}--}}
     </table>
 </div>
 
-<script>
-    let singleRow = document.getElementById('single_result');
-    let deleteButton = document.getElementById('delete');
-    const table = document.getElementById('table');
+{{--<script>--}}
+{{--    let singleRow = document.getElementById('single_result');--}}
+{{--    let deleteButton = document.getElementById('delete');--}}
+{{--    const table = document.getElementById('table');--}}
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        deleteButton.addEventListener('click', (e.target) => (
-            table.removeChild(singleRow)
-        ));
-    });
-</script>
+{{--    document.addEventListener('DOMContentLoaded', () => {--}}
+{{--        deleteButton.addEventListener('click', (e.target)=>--}}
+{{--        {--}}
+{{--            e.target.parentNode.parentNode.parentNode.removeChild(singleRow)--}}
+{{--        });--}}
+{{--    });--}}
+{{--</script>--}}
 </body>
 </html>
 

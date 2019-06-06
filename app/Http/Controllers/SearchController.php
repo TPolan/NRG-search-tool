@@ -53,25 +53,21 @@ class SearchController extends Controller
         $finalSearch = createSearch($request->name);
         $excludeSearch = createSearch($request->exclude);
 
+        $baseQuery = DB::table('tracks')->select('external_track_id', 'duration', 'isrc_country_code', 'isrc_registrant_code', 'isrc_year', 'isrc_ident', 'person_interprets', 'tracks.external_album_id', 'albums.code', 'albums.release_year')
+            ->selectRaw('tracks.name as trackName')
+            ->selectRaw('albums.name as albumName')
+            ->selectRaw('labels.name as labelName')
+            ->selectRaw('tracks.tag_instruments as instruments')
+            ->leftJoin('albums', 'tracks.external_album_id', '=', 'albums.external_album_id')
+            ->leftJoin('labels', 'tracks.external_label_id', '=', 'labels.external_id');
+
         if (is_array($finalSearch)) {
-            $results = DB::table('tracks')->select('external_track_id', 'duration', 'isrc_country_code', 'isrc_registrant_code', 'isrc_year', 'isrc_ident', 'person_interprets', 'tracks.external_album_id', 'albums.code', 'albums.release_year')
-                ->selectRaw('tracks.name as trackName')
-                ->selectRaw('albums.name as albumName')
-                ->selectRaw('labels.name as labelName')
-                ->selectRaw('tracks.tag_instruments as instruments')
-                ->join('albums', 'tracks.external_album_id', '=', 'albums.external_album_id')
-                ->join('labels', 'tracks.external_album_id', '=', 'labels.external_id')
+            $results = $baseQuery
                 ->where([['person_interprets', 'like', $finalSearch[0]], ['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
                 ->orWhere([['person_interprets', 'like', $finalSearch[1]], ['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
                 ->get();
         } else {
-            $results = DB::table('tracks')->select('external_track_id', 'duration', 'isrc_country_code', 'isrc_registrant_code', 'isrc_year', 'isrc_ident', 'person_interprets', 'tracks.external_album_id', 'albums.code', 'albums.release_year')
-                ->selectRaw('tracks.name as trackName')
-                ->selectRaw('albums.name as albumName')
-                ->selectRaw('labels.name as labelName')
-                ->selectRaw('tracks.tag_instruments as instruments')
-                ->join('albums', 'tracks.external_album_id', '=', 'albums.external_album_id')
-                ->join('labels', 'tracks.external_album_id', '=', 'labels.external_id')
+            $results = $baseQuery
                 ->where([['person_interprets', 'like', $finalSearch], ['person_interprets', 'not like', $request->exclude ? $excludeSearch : '']])
                 ->get();
         }
