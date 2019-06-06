@@ -53,10 +53,10 @@
             <div class="single_result" id="single_result">
                 <tr>
                     <td>{{$result->external_track_id}}</td>
-                    <td>{{extractMainArtist($result->person_interprets,$request->name)}}</td>
+                    <td>{{extractMainArtist($result->person_interprets,stripChars(array('"',','),$request->name))}}</td>
                     <td>{{$result->trackName}}</td>
                     <td>{{$result->person_interprets}}</td>
-                    <td>{{extractOtherArtists($result->person_interprets,$request->name)}}</td>
+                    <td>{{extractOtherArtists($result->person_interprets,stripChars(array('"',','),$request->name)) ? extractOtherArtists($result->person_interprets,stripChars(array('"',','),$request->name)) : "No other Artists"}}</td>
                     <td>{{$result->instruments}}</td>
                     <td>{{countArtists($result->person_interprets)}}</td>
                     <td>{{artistShare(countArtists($result->person_interprets)) . '%'}}</td>
