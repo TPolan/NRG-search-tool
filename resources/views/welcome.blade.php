@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="jumbotron">
-        <h1 class="display-3">NRG Reperoi</h1>
+        <h1 class="display-3">NRG Repertoire</h1>
         <p class="lead"></p>
         <hr class="my-4">
         <p></p>

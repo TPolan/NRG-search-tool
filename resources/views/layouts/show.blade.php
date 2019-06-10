@@ -8,9 +8,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
 <div class="container-fluid">
 
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid" id="table">
         <div class="container">
             <h1 class="display-3">NRG Repertoire Search</h1>
             <form method="get" action="{{action('SearchController@show')}}">
@@ -48,9 +49,9 @@
             <th>Label - Name</th>
         </tr>
         </thead>
-        <tbody>
-        @foreach($results as $result)
-            <div class="single_result" id="single_result">
+        @foreach($results as $i => $result)
+            <div class="single_result" id='result{{$i}}'>
+                <tbody>
                 <tr>
                     <td>{{$result->external_track_id}}</td>
                     <td>{{extractMainArtist($result->person_interprets,stripChars(array('"',','),$request->name))}}</td>
@@ -67,27 +68,29 @@
                     <td>{{$result->release_year}}</td>
                     <td>{{$result->labelName}}</td>
                     <td>
-                        <button id="delete">X</button>
+                        <button class="delete" id=`result{{$i}}`>X</button>
                     </td>
                 </tr>
+                </tbody>
             </div>
         @endforeach
     </table>
 </div>
 
-{{--<script>--}}
-{{--    let singleRow = document.getElementById('single_result');--}}
-{{--    let deleteButton = document.getElementById('delete');--}}
-{{--    const table = document.getElementById('table');--}}
+<script>
+    const table = document.getElementById('table');
 
+    document.addEventListener('click', (e) => {
+        let delButton = e.target.id;
+        console.log(document.getElementById(`${delButton}`));
 
-{{--    document.addEventListener('DOMContentLoaded', () => {--}}
-{{--        deleteButton.addEventListener('click', (e.target)=>--}}
-{{--        {--}}
-{{--            e.target.parentNode.parentNode.parentNode.removeChild(singleRow)--}}
-{{--        });--}}
-{{--    });--}}
-{{--</script>--}}
+        if (e.target.className === 'delete') {
+            console.log(delButton)
+            table.removeChild(document.getElementById(delButton));
+        }
+    });
+
+</script>
 </body>
 </html>
 

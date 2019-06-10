@@ -14,13 +14,13 @@
 
 
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Search tool routes:
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('layouts.search');
+//});
 Auth::routes();
-Route::get('/search', 'SearchController@index');
+Route::get('/', 'SearchController@index');
 Route::get('/show', 'SearchController@show');
 
