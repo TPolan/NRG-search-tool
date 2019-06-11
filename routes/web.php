@@ -12,7 +12,7 @@
 */
 
 
-
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/', function () {
 //    return view('layouts.search');
 //});
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::get('/', 'SearchController@index');
 Route::get('/show', 'SearchController@show');
 

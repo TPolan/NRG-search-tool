@@ -1,13 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <title>NRG Repertoire Search</title>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@extends('layouts.app')
+@section('content')
 
 <div class="container-fluid">
 
@@ -49,48 +42,45 @@
             <th>Label - Name</th>
         </tr>
         </thead>
+        <tbody id="tablebody">
         @foreach($results as $i => $result)
-            <div class="single_result" id='result{{$i}}'>
-                <tbody>
-                <tr>
-                    <td>{{$result->external_track_id}}</td>
-                    <td>{{extractMainArtist($result->person_interprets,stripChars(array('"',','),$request->name))}}</td>
-                    <td>{{$result->trackName}}</td>
-                    <td>{{$result->person_interprets}}</td>
-                    <td>{{extractOtherArtists($result->person_interprets,stripChars(array('"',','),$request->name)) ? extractOtherArtists($result->person_interprets,stripChars(array('"',','),$request->name)) : "No other Artists"}}</td>
-                    <td>{{$result->instruments}}</td>
-                    <td>{{countArtists($result->person_interprets)}}</td>
-                    <td>{{artistShare(countArtists($result->person_interprets)) . '%'}}</td>
-                    <td>{{$result->duration}}</td>
-                    <td>{{$result->isrc_country_code . $result->isrc_registrant_code . $result->isrc_year . $result->isrc_ident}}</td>
-                    <td>{{$result->albumName}}</td>
-                    <td>{{$result->code}}</td>
-                    <td>{{$result->release_year}}</td>
-                    <td>{{$result->labelName}}</td>
-                    <td>
-                        <button class="delete" id=`result{{$i}}`>X</button>
-                    </td>
-                </tr>
-                </tbody>
-            </div>
+            <tr class="single_result" id='result{{$i}}'>
+                <td>{{$result->external_track_id}}</td>
+                <td>{{extractMainArtist($result->person_interprets,stripChars(array('"',','),$request->name))}}</td>
+                <td>{{$result->trackName}}</td>
+                <td>{{$result->person_interprets}}</td>
+                <td>{{extractOtherArtists($result->person_interprets,stripChars(array('"',','),$request->name)) ? extractOtherArtists($result->person_interprets,stripChars(array('"',','),$request->name)) : "No other Artists"}}</td>
+                <td>{{$result->instruments}}</td>
+                <td>{{countArtists($result->person_interprets)}}</td>
+                <td>{{artistShare(countArtists($result->person_interprets)) . '%'}}</td>
+                <td>{{$result->duration}}</td>
+                <td>{{$result->isrc_country_code . $result->isrc_registrant_code . $result->isrc_year . $result->isrc_ident}}</td>
+                <td>{{$result->albumName}}</td>
+                <td>{{$result->code}}</td>
+                <td>{{$result->release_year}}</td>
+                <td>{{$result->labelName}}</td>
+                <td>
+                    <button class="delete" id=`result{{$i}}`>X</button>
+                </td>
+            </tr>
         @endforeach
+        </tbody>
     </table>
 </div>
 
 <script>
-    const table = document.getElementById('table');
+    const table = document.getElementById('tablebody');
 
     document.addEventListener('click', (e) => {
-        let delButton = e.target.id;
-        console.log(document.getElementById(`${delButton}`));
 
-        if (e.target.className === 'delete') {
-            console.log(delButton)
-            table.removeChild(document.getElementById(delButton));
-        }
+        if (e.target.className !== 'delete') return;
+
+        let delButton = e.target.id;
+        console.log(delButton);
+        table.removeChild(document.querySelector(".single_result"));
+
     });
 
 </script>
-</body>
-</html>
+@endsection
 
