@@ -14,13 +14,11 @@
 
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 //Search tool routes:
-//Route::get('/', function () {
-//    return view('layouts.search');
-//});
+
 Auth::routes(['register' => false]);
-Route::get('/search', 'SearchController@index');
+Route::get('/', 'SearchController@index');
 Route::get('/show', 'SearchController@show');
 

@@ -60,7 +60,7 @@
                 <td>{{$result->release_year}}</td>
                 <td>{{$result->labelName}}</td>
                 <td>
-                    <button class="delete" id=`result{{$i}}`>X</button>
+                    <button class="delete" id={{$i}}>X</button>
                 </td>
             </tr>
         @endforeach
@@ -69,15 +69,15 @@
 </div>
 
 <script>
-    const table = document.getElementById('tablebody');
+    const tablebody = document.getElementById('tablebody');
 
     document.addEventListener('click', (e) => {
 
         if (e.target.className !== 'delete') return;
 
         let delButton = e.target.id;
-        console.log(delButton);
-        table.removeChild(document.querySelector(".single_result"));
+        console.log(`result${e.target.id}`);
+        tablebody.removeChild(document.getElementById(`result${e.target.id}`));
 
     });
 
