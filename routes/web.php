@@ -21,6 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 //    return view('layouts.search');
 //});
 Auth::routes(['register' => false]);
-Route::get('/', 'SearchController@index');
+Route::get('/search', 'SearchController@index');
 Route::get('/show', 'SearchController@show');
 
