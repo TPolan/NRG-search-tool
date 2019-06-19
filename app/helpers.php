@@ -23,6 +23,17 @@ function extractOtherArtists($artists, $mainArtistsName)
 function extractMainArtist($artists, $mainArtistsName)
 {
     $artists = explode(',', $artists);
+    /*Mark Allaway
+    result Mark David Allaway, Martin Wheatly
+    */
+
+    // explode on names by space
+    $artistsExploded = array_map(function($name){
+        return explode(' ', $name);
+    }, $artists);
+    // foreach $artists take last string and compare to last string of query, return first matched array
+
+
     $mainArtist = array_intersect($artists, array($mainArtistsName));
     $mainArtist = implode(',', $mainArtist);
 

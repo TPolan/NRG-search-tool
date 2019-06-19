@@ -23,7 +23,7 @@
     </div>
 
 
-    <table class="table" id="table">
+    <table class="table" id="mainTable">
         <thead>
         <tr>
             <th>Track -ID</th>
@@ -40,6 +40,7 @@
             <th>Album - Code</th>
             <th>Album - Release Year</th>
             <th>Label - Name</th>
+            <th><button id="selectAll">Copy All</button></th>
         </tr>
         </thead>
         <tbody id="tablebody">
@@ -79,6 +80,33 @@
         console.log(`result${e.target.id}`);
         tablebody.removeChild(document.getElementById(`result${e.target.id}`));
 
+    });
+
+    const selectAllButton = document.getElementById('selectAll');
+    const table = document.getElementById('mainTable');
+    const selectElementContents = (el) => {
+        var body = document.body, range, sel;
+        if (document.createRange && window.getSelection) {
+            range = document.createRange();
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            try {
+                range.selectNodeContents(el);
+                sel.addRange(range);
+            } catch (e) {
+                range.selectNode(el);
+                sel.addRange(range);
+            }
+        } else if (body.createTextRange) {
+            range = body.createTextRange();
+            range.moveToElementText(el);
+            range.select();
+        }
+    };
+
+    selectAllButton.addEventListener('click', ()=> {
+        selectElementContents(table);
+        document.execCommand('copy');
     });
 
 </script>
