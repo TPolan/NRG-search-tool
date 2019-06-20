@@ -2,21 +2,21 @@
 @section('content')
 
     <div class="container-fluid">
-        
-                <h1 class="display-3">NRG Repertoire Search</h1>
-                <form method="get" action="{{action('SearchController@show')}}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Artist Name:</label>
-                        <input type="text" class="form-control" name="name" id="name" value="{{$request->name}}">
 
-                        <label for="formGroupExampleInput2">Exclude:</label>
-                        <input type="text" class="form-control" id="exclude" name="exclude"
-                               value="{{$request->exclude}}">
+        <h1 class="display-3">NRG Repertoire Search</h1>
+        <form method="get" action="{{action('SearchController@show')}}">
+            @csrf
+            <div class="form-group">
+                <label for="formGroupExampleInput">Artist Name:</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{$request->name}}">
 
-                        <button class="btn btn-primary btn-lg" type="submit">Search</button>
-                    </div>
-                </form>
+                <label for="formGroupExampleInput2">Exclude:</label>
+                <input type="text" class="form-control" id="exclude" name="exclude"
+                       value="{{$request->exclude}}">
+
+                <button class="btn btn-primary btn-lg" type="submit">Search</button>
+            </div>
+        </form>
 
         <table class="table sticky-top" id="tableHeader">
             <thead>
@@ -40,6 +40,8 @@
                 </th>
             </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
         <table id="tableData">
             <thead>
