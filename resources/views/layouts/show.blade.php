@@ -2,8 +2,7 @@
 @section('content')
 
     <div class="container-fluid">
-
-        <h1 class="display-3">NRG Repertoire Search</h1>
+        <div class="container-fluid sticky-top" id="fixedHeader">
         <form method="get" action="{{action('SearchController@show')}}">
             @csrf
             <div class="form-group">
@@ -17,8 +16,7 @@
                 <button class="btn btn-primary btn-lg" type="submit">Search</button>
             </div>
         </form>
-
-        <table class="table sticky-top" id="tableHeader">
+        <table class="table" id="tableHeader">
             <thead>
             <tr>
                 <th>Track -ID</th>
@@ -43,8 +41,10 @@
             <tbody>
             </tbody>
         </table>
-        <table id="tableData">
-            <thead>
+        </div>
+
+        <table class="table" id="tableData">
+            <thead class="sticky-top">
             <tr>
                 <th>Track -ID</th>
                 <th>Track - Artist Name</th>
