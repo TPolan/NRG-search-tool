@@ -65,17 +65,6 @@
             @endforeach
             </tbody>
         </table>
-
-
-{{--        training ground start--}}
-
-
-
-
-
-
-
-{{--        training ground finish--}}
     </div>
 
     <script>
