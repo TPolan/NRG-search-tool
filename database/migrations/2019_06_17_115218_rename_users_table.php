@@ -13,7 +13,7 @@ class RenameUsersTable extends Migration
      */
     public function up()
     {
-        Schema::rename($Users, $to);
+        Schema::rename('users', 'nrg_users');
     }
 
     /**

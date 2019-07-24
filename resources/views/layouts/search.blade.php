@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-3">NRG Repertoire Search</h1>
+    <div class="container-fluid">
+        <div class="" id="fixedHeader">
             <form method="get" action="{{action('SearchController@show')}}">
                 @csrf
                 <div class="form-group">
@@ -17,25 +16,26 @@
                 </div>
             </form>
         </div>
-    </div>
 
-    <table class="table" id="table">
-        <thead>
-        <tr>
-            <th>Track -ID</th>
-            <th>Track - Artist Name</th>
-            <th>Track - Name</th>
-            <th>Track - All Artists</th>
-            <th>Track - Other Artists</th>
-            <th>Track - Instruments</th>
-            <th>Track - Number of Artists</th>
-            <th>Track - Artists Share</th>
-            <th>Track - Duration</th>
-            <th>Track - ISRC</th>
-            <th>Album - Name</th>
-            <th>Album - Code</th>
-            <th>Album - Release Year</th>
-            <th>Label - Name</th>
-        </tr>
-        </thead>
+        <table class="table" id="table">
+            <thead>
+            <tr>
+                <th>Track -ID</th>
+                <th>Track - Artist Name</th>
+                <th>Track - Name</th>
+                <th>Track - All Artists</th>
+                <th>Track - Other Artists</th>
+                <th>Track - Instruments</th>
+                <th>Track - Number of Artists</th>
+                <th>Track - Artists Share</th>
+                <th>Track - Duration</th>
+                <th>Track - ISRC</th>
+                <th>Album - Name</th>
+                <th>Album - Code</th>
+                <th>Album - Release Year</th>
+                <th>Label - Name</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 @endsection
