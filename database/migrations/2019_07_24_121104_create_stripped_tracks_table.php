@@ -16,7 +16,7 @@ class CreateStrippedTracksTable extends Migration
         Schema::create('stripped_tracks', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement();
             $table->integer('external_track_id');
-            $table->char('artist1', 255);
+            $table->char('artist1', 255)->nullable();;
             $table->char('artist2', 255)->nullable();
             $table->char('artist3', 255)->nullable();
             $table->char('artist4', 255)->nullable();
@@ -24,17 +24,15 @@ class CreateStrippedTracksTable extends Migration
             $table->char('artist6', 255)->nullable();
             $table->char('artist7', 255)->nullable();
             $table->char('artist8', 255)->nullable();
-            $table->char('track_name', 255);
-            $table->char('instruments', 255);
-            $table->smallInteger('duration');
-            $table->char('isrc_code', 255);
-            $table->char('track_name', 255);
-            $table->char('album_name', 255);
-            $table->char('album_code', 255);
-            $table->char('instruments', 255);
-            $table->smallInteger('album_release_year');
-            $table->char('label_name', 255);
-            $table->timestamps();
+            $table->smallInteger('duration')->nullable();;
+            $table->char('isrc_code', 255)->nullable();;
+            $table->char('track_name', 255)->nullable();;
+            $table->char('album_name', 255)->nullable();;
+            $table->char('album_code', 255)->nullable();;
+            $table->char('instruments', 255)->nullable();;
+            $table->smallInteger('album_release_year')->nullable();;
+            $table->char('label_name', 255)->nullable();;
+            $table->timestamps()->nullable();;
         });
     }
 
